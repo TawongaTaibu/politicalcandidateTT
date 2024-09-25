@@ -7,9 +7,16 @@ from .forms import CreateUserForm
 from .models import News
 from datetime import datetime
 
-
-# This function holds the Data-driven component of our webpage
 def home(request):
+    """
+    Render the homepage with global warming data.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The rendered homepage template.
+    """
     global_warming_data = {
         'temperature_rise': '1.1°C',
         'sea_level_rise': '20cm',
@@ -17,22 +24,38 @@ def home(request):
     }
     return render(request, 'home.html', {'global_warming_data': global_warming_data})
 
-#This function handles the user's login process
 def login(request):
+    """
+    Handle the user's login process.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The rendered login template or redirect to the news page.
+    """
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
             user = form.get_user()
             auth_login(request, user)
-            return redirect('News')  #Redirect to the news page after successful login
+            return redirect('News')  # Redirect to the news page after successful login
         else:
-            messages.error(request, "Invalid username or password.")  #Display an error message for invalid login
+            messages.error(request, "Invalid username or password.")  # Display an error message for invalid login
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
-# This function handles the user's registration process and it uses a form to do so
 def registration(request):
+    """
+    Handle user registration process.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The rendered registration template or redirect to the login page.
+    """
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
@@ -42,12 +65,30 @@ def registration(request):
         form = CreateUserForm()
     return render(request, 'registration.html', {'form': form})
 
-# Firstly, a user has to be logged in to be able to access the News page
 @login_required
 def News_View(request, id):
-    selected_news = get_object_or_404(News,id=id)
-    return render(request, 'News_View.html', {'selected_news':selected_news})
+    """
+    View a specific news item, requiring the user to be logged in.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+        id (int): The ID of the news item to view.
+
+    Returns:
+        HttpResponse: The rendered news view template.
+    """
+    selected_news = get_object_or_404(News, id=id)
+    return render(request, 'News_View.html', {'selected_news': selected_news})
 
 def news_list(request):
+    """
+    Display a list of all news items.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The rendered news list template.
+    """
     news_items = News.objects.all()
-    return render(request, 'news_list.html', {'news_items':news_items})
+    return render(request, 'news_list.html', {'news_items': news_items})
