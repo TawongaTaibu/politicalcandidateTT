@@ -120,6 +120,5 @@ For example, if a user is willing to view the news of the political party he/she
 
 ## Credits
 
-List any contributors or resources used in your project.
-
+https://www.freecodecamp.org/news/sphinx-for-django-documentation-2454e924b3bc/
 ---
