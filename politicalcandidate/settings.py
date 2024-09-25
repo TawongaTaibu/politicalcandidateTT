@@ -68,7 +68,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'politicalcandidate.wsgi.application'
+WSGI_APPLICATION = 'politicalcandidateTT.wsgi.application'
 
 
 # Database
