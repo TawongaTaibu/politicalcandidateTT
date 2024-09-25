@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Democracy For All</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!--This nav-bar acts as a quick navigation for users to be able to get to specific pages easily -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'images/DFA.png' %}" alt="Party Logo" width="30" height="30">
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'dfa:home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'dfa:registration' %}">Registration</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'dfa:news_list' %}">News</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'dfa:login' %}">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- This hero section acts as the main welcome page for our webpage-->
+    <div class="jumbotron text-center bg-primary text-white">
+        <h1 class="display-4">The People's Voice Comes First!</h1>
+        <p class="lead">Building a Better Tomorrow for the Future Generations through Unity, Peace and Development</p>
+    </div>
+
+    <!-- The party's manifesto and the global warming data is here -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8">
+                <h2>Our Manifesto</h2>
+                <p>DFA is proud to announce that we managed to win half of the parliamentary seats 
+                    during the last election and we are going to continue delivering tangible results
+                    to our constituencies. Moving forward, our key focus is addressing the global warming
+                    challenges that our country is facing as this undermines the gross food harvest we expect
+                    to fight against hunger in our beloved nation. We strongly believe that through collaborations
+                    with both the public and private sectors, this challenge will become something of the past. On
+                    another note, DFA through it's members of parliament addressed the issue of Gender Based Violence
+                    in our country and how much it can affect the overall GDP of our motherland. These issues should
+                    be dealt with thoroughly by our law enforcement officers.
+                </p>
+            </div>
+
+            <!-- Sidebar for Global Warming -->
+            <div class="col-md-4">
+                <h3>Global Warming Stats</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">Temperature Rise: {{ global_warming_data.temperature_rise }}</li>
+                    <li class="list-group-item">Sea Level Rise: {{ global_warming_data.sea_level_rise }}</li>
+                    <li class="list-group-item">CO2 Levels: {{ global_warming_data.co2_levels }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer for unregistered visitors for feedback -->
+    <footer class="bg-light mt-5 p-3">
+        <div class="container">
+            <form class="form-inline">
+                <div class="form-group mb-2">
+                    <label for="name" class="sr-only">Name:</label><br>
+                    <input type="text" class="form-control" id="name" placeholder="Name">
+                </div>
+                <div class="form-group mb-2">
+                    <label for="email" class="sr-only">Email:</label><br>
+                    <input type="email" class="form-control" id="email" placeholder="Email">
+                </div>
+                <div class="form-group mb-2">
+                    <label for="phone" class="sr-only">Phone:</label><br>
+                    <input type="text" class="form-control" id="phone" placeholder="Phone">
+                </div>
+                <div class="form-group mb-2">         
+                    <label for="message" class="sr-only">Feedback:</label><br>
+                    <textarea id="message" name="message" rows="4" placeholder="Please enter your feedback here"></textarea><br>
+                </div>
+                <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                <img src="{% static 'images/DFA.png' %}" alt="DFA Party Logo" class="footer-logo ml-3">
+            </form>
+        </div>
+    </footer>
+
+    <footer class="text-center">
+        <p>&copy; 2024 DFA. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membership Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 400px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .form-group button {
+            width: 100%;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message {
+            color: #ff0000;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .form-group a {
+            display: block;
+            margin-top: 15px;
+            text-align: center;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .form-group a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<!-- This is the body of our registration page and it's main class name is 'container'.
+ Inside the container there is subclass 'form-group and it holds the specific registration information-->
+<body>
+    <div class="container">
+        <h2>Registration</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_first_name">First Name:</label>
+                {{ form.first_name }}
+            </div>
+            <div class="form-group">
+                <label for="id_surname">Surname:</label>
+                {{ form.surname }}
+            </div>
+            <div class="form-group">
+                <label for="id_email">Email:</label>
+                {{ form.email }}
+            </div>
+            <div class="form-group">
+                <label for="id_id_number">ID Number:</label>
+                {{ form.id_number }}
+            </div>
+            <div class="form-group">
+                <label for="id_gender">Gender:</label>
+                {{ form.gender }}
+            </div>
+            <div class="form-group">
+                <label for="id_username">Username:</label>
+                {{ form.username }}
+            </div>
+            <div class="form-group">
+                <label for="id_password1">Password:</label>
+                {{ form.password1 }}
+            </div>
+            <div class="form-group">
+                <label for="id_password2">Confirm Password:</label>
+                {{ form.password2 }}
+            </div>
+            <div class="form-group">
+                <button type="submit">Register</button>
+            </div>
+        </form>
+        <!--If a user enters invalid information, an error message is generated-->
+        {% if messages %}
+            <div class="error-message">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
+{% endblock %}

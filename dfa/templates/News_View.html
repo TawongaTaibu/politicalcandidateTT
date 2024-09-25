@@ -1,0 +1,41 @@
+<!-- dfa/templates/dfa/news_detail.html -->
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ news_item.title }}</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .news-image {
+            width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .news-content {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <a href="{% url 'dfa:news_list' %}" class="btn btn-secondary mb-4">Back to News Articles</a>
+        <h1 class="text-center">{{ selected_news.title }}</h1>
+        <img src="{% static 'images/news.jpeg' %}" alt="{{ news_item.title }}" class="news-image">
+        <p class="text-muted">Published on: {{ selected_news.date }}</p>
+        <div class="news-content">
+            <p>{{ selected_news.content }}</p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+{% endblock %}
+
